@@ -39,10 +39,10 @@ public class RuleServiceTests {
         when(ruleRepository.findAll()).thenReturn(Collections.singletonList(rule));
 
         Transaction transaction = new Transaction();
-        transaction.setMontant(100.0f);
+        transaction.setMontantTransaction(100.0f);
         assertTrue(ruleService.estUneTransactionEligible(transaction));
 
-        transaction.setMontant(30.0f);
+        transaction.setMontantTransaction(30.0f);
         assertFalse(ruleService.estUneTransactionEligible(transaction));
     }
 

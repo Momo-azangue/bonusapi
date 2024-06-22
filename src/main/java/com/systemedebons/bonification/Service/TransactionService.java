@@ -70,9 +70,9 @@ public class TransactionService {
         Historique historique = new Historique();
         historique.setUser(savedTransaction.getUser());
         historique.setDate(LocalDate.now());
-        historique.setType(savedTransaction.getType());
-        historique.setPoints(points);
-        historique.setMontantTransaction(savedTransaction.getMontant());
+        historique.setTypeOperation(savedTransaction.getTypeTransaction());
+        historique.setPointsAvant(points);
+        historique.setMontantTransaction(savedTransaction.getMontantTransaction());
         historique.setDescription("Transaction " + (points > 0 ? "éligible" : "non éligible") + " pour des points.");
 
         historiqueService.saveHistorique(historique);

@@ -36,7 +36,7 @@ public class RuleService {
 
         List<Rule> rules = ruleRepository.findAll();
         for (Rule rule : rules) {
-            if(transaction.getMontant() >= rule.getMontantMin()){
+            if(transaction.getMontantTransaction() >= rule.getMontantMin()){
                 return true;
             }
         }
@@ -48,8 +48,8 @@ public class RuleService {
         int points = 0;
         List<Rule> rules = ruleRepository.findAll();
         for (Rule rule : rules) {
-            if(transaction.getMontant() >= rule.getMontantMin()){
-                points = rule.getPoints();
+            if(transaction.getMontantTransaction() >= rule.getMontantMin()){
+                points = rule.getPointsParTranscations();
             }
         }
         return points;

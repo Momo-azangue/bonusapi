@@ -3,8 +3,6 @@ package com.systemedebons.bonification.Entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.systemedebons.bonification.Security.Deserializer.GrantedAuthorityDeserializer;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -19,6 +17,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -54,6 +53,14 @@ public class User implements UserDetails {
     private Set<Role> roles = new HashSet<>();
 
     private String resetToken;
+
+    private Date dateInscription;
+
+    private  int pointsFidelite;
+
+    @DBRef
+    private  Set<Transaction> transactions;
+
 
     @JsonCreator
     public User(@JsonProperty("username") String username,

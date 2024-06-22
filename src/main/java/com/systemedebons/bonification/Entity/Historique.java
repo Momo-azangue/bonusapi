@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @Document(collection = "historiques")
@@ -15,8 +16,9 @@ public class Historique {
     @DBRef
     private User user;
     private LocalDate date;
-    private String type;
-    private int points;
-    private  float montantTransaction;
+    private String typeOperation;
+    private int pointsAvant;
+    private int pointsApres;
+    private  double montantTransaction;
     private String description;
 }
