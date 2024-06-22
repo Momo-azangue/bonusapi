@@ -1,13 +1,14 @@
 package com.systemedebons.bonification.Service;
 
 
-import com.systemedebons.bonification.Security.Jwt.JwtUtils;
+import com.systemedebons.bonification.Entity.ParametreGlobal;
 import com.systemedebons.bonification.Entity.User;
 import com.systemedebons.bonification.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,8 +25,11 @@ public class UserService {
     @Autowired
     private EmailService emailService;
 
+
     @Autowired
-    private JwtUtils jwtUtils;
+    private ParametreGlobalService parametreGlobalService;
+
+
 
 
     public List<User> getAllUsers() {
@@ -48,11 +52,19 @@ public class UserService {
 
             if(user.getPassword() != null && !user.getPassword().isEmpty()) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
+
             } else{
                 throw new IllegalArgumentException("Mot de Passe ne peut pas être null ou  vide");
             }
+            user.setDateInscription(new Date());
+        ParametreGlobal pointsInscription = parametreGlobalService.getParametreByCle("pointsInscription");
+        int points = pointsInscription != null ? Integer.parseInt(pointsInscription.getValeur()): 0;
+            user.setPointsFidelite(points);
             User userSaved = userRepository.save(user);
             emailService.sendWelcomeEmail(user.getEmail());
+
+        // Ajouter un message de bonification
+        System.out.println("Bravo et merci pour votre inscription réussie qui vous donne droit à " + points + " points convertibles en transactions");
 
         return userSaved;
     }

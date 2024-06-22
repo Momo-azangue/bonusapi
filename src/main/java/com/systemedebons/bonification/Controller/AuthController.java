@@ -120,7 +120,7 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
@@ -156,41 +156,6 @@ public class AuthController {
 
 
 
- /**   @PostMapping("/refresh-token")
-    public ResponseEntity<?> refreshToken(@Valid @RequestBody TokenRefreshRequest request) {
-        String requestToken = request.getRefreshToken();
-
-        if (requestToken == null || requestToken.isEmpty()) {
-            throw new TokenRefreshException(requestToken, "Refresh token is missing!");
-        }
-
-        RefreshToken refreshToken = refreshTokenService.findByToken(requestToken)
-                .orElseThrow(() -> new TokenRefreshException(requestToken, "Refresh token is not in database!"));
-
-        if (refreshToken.isExpired()) {
-            refreshTokenService.deleteByToken(requestToken);
-            throw new TokenRefreshException(requestToken, "Refresh token is expired. Please log in again.");
-        }
-
-        String newToken = jwtUtils.generateJwtTokenFromUserId(refreshToken.getUserId());
-        String newRefreshToken = jwtUtils.generateRefreshToken(refreshToken.getUserId());
-        refreshTokenService.updateRefreshToken(refreshToken.getUserId(), newRefreshToken);
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(refreshToken.getUserId());
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(new JwtResponse(
-                newToken,
-                newRefreshToken,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles
-        ));
-    }
-**/
 
 
 
