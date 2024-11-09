@@ -47,7 +47,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             logger.error("Cannot set user authentication: {}", e);
         }
-
         filterChain.doFilter(request, response);
     }
 
@@ -59,4 +58,11 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         return null;
     }
 
+    private String parseAPIKey(HttpServletRequest request) {
+        return request.getHeader("X-API-KEY");
+    }
+
+    private String parseSecretKey(HttpServletRequest request) {
+        return request.getHeader("X-API-SECRET");
+    }
 }

@@ -33,7 +33,6 @@ public class RuleService {
     }
 
     public boolean estUneTransactionEligible(Transaction transaction) {
-
         List<Rule> rules = ruleRepository.findAll();
         for (Rule rule : rules) {
             if(transaction.getMontant() >= rule.getMontantMin()){
@@ -44,7 +43,6 @@ public class RuleService {
     }
 
     public int calculerPoints(Transaction transaction) {
-
         int points = 0;
         List<Rule> rules = ruleRepository.findAll();
         for (Rule rule : rules) {
@@ -54,7 +52,4 @@ public class RuleService {
         }
         return points;
     }
-
-
-
 }

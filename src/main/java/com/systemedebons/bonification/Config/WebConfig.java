@@ -16,7 +16,6 @@ public class WebConfig {
         return new JavaTimeModule();
     }
 
-
     @Bean
     public ObjectMapper objectMapper() {
         return Jackson2ObjectMapperBuilder.json()

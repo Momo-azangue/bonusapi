@@ -9,6 +9,7 @@ import com.systemedebons.bonification.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -31,7 +32,6 @@ public class TransactionService {
 
     @Autowired
     private UserRepository userRepository;
-
 
     public List<Transaction> getAllTransactions() {
         return transactionRepository.findAll();
@@ -83,10 +83,4 @@ public class TransactionService {
     public void deleteTransaction(String id) {
         transactionRepository.deleteById(id);
     }
-
-
-
-
-
-
 }

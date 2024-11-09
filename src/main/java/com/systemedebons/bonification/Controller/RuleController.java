@@ -22,7 +22,6 @@ public class RuleController {
     @Autowired
     private RuleService ruleService;
 
-
     @GetMapping
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public List<Rule> getAllRules() {
@@ -43,10 +42,8 @@ public class RuleController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         String username = userDetails.getUsername(); // Nom de l'utilisateur
         String userId = userDetails.getId(); // ID de l'utilisateur (à adapter en fonction de votre UserDetails)
-
         rule.setCreatedBy(userId);
         rule.setCreatedByName(username);
-
         return ruleService.saveRule(rule);
     }
 
@@ -56,5 +53,4 @@ public class RuleController {
         ruleService.deleteRule(id);
         return ResponseEntity.noContent().build();
     }
-
 }

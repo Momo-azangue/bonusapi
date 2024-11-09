@@ -79,7 +79,7 @@ public class JwtUtils {
         return Jwts.parserBuilder()
                 .setSigningKey(key())
                 .build()
-                .parseClaimsJws(token)
+                 .parseClaimsJws(token)
                 .getBody();
     }
 

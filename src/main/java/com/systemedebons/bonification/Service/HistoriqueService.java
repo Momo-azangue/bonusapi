@@ -20,7 +20,6 @@ public class HistoriqueService {
 
     public Optional<Historique> getHistoriqueById(String id) {
         return historiqueRepository.findById(id);
-
     }
 
     public Historique saveHistorique(Historique historique) {
@@ -32,9 +31,6 @@ public class HistoriqueService {
     }
 
     public List<Historique> getHistoriqueByUserId(String userId) {
-
         return historiqueRepository.findByUserId(userId);
     }
-
-
 }

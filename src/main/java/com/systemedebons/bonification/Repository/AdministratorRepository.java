@@ -8,8 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface AdministratorRepository extends MongoRepository<Administrator, String> {
-
-            Administrator findByUsername(String Username);
+    Administrator findByUsername(String Username);
     Optional<Administrator> findByEmail(String email);
     Optional<Administrator> findByResetToken(String token);
 }

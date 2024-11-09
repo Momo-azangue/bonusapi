@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Rewards")
 public class Reward {
 
-
     @Id
     private String  id;
     private String nom;

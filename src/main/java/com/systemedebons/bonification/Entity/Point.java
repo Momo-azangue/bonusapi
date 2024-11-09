@@ -13,11 +13,11 @@ public class Point {
 
     @Id
     private String id;
+
     @DBRef
     private User user;
+
     private int nombre;
+
     private LocalDate date;
-
-
-
 }

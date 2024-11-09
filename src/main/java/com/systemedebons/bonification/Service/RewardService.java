@@ -33,7 +33,6 @@ public class RewardService {
 
     public Reward saveReward(Reward reward) {
         return rewardRepository.save(reward);
-
     }
 
     public void deleteReward(String id) {
@@ -46,7 +45,6 @@ public class RewardService {
             Reward reward = rewardOptional.get();
             int solde = pointRepository.findByUserId(userId)
                     .stream().mapToInt(Point::getNombre).sum();
-
             if (solde >= reward.getPoints()) {
                 Optional<User> userOptional = userRepository.findById(userId);
                 if (userOptional.isPresent()) {
@@ -62,9 +60,4 @@ public class RewardService {
         }
         return false;
     }
-
-
-
-
-
 }

@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
 @Api
 @RestController
 @RequestMapping("api/rewards")
 public class RewardController {
-
 
     @Autowired
     RewardService rewardService;
@@ -31,8 +31,8 @@ public class RewardController {
     public ResponseEntity<Reward> getRewardById(@PathVariable String id) {
         Optional<Reward> reward = rewardService.getRewardById(id);
         return reward.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-
     }
+
     @PostMapping("create-reward")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public Reward createReward(@RequestBody Reward reward) {
@@ -47,19 +47,10 @@ public class RewardController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/echanger/{UserId}/{id}")
+    @PostMapping("/echanger/{UserId}/{rewardId}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<Void> exchangesPoints(@PathVariable String UserId, @PathVariable  String id) {
-        boolean success = rewardService.exchangePoints(UserId, id);
-
-        if (success) {
-            return ResponseEntity.ok().build();
-        }else {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<Void> exchangesPoints(@PathVariable String UserId, @PathVariable String rewardId) {
+        boolean success = rewardService.exchangePoints(UserId, rewardId);
+        return success ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
-
-
-
-
-        }
+}

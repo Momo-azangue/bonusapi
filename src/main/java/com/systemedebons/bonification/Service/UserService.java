@@ -27,45 +27,34 @@ public class UserService {
     @Autowired
     private JwtUtils jwtUtils;
 
-
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     public Optional<User> getUserById(String id) {
-
         return userRepository.findById(id);
-
     }
 
-
     public  User saveUser(User user) {
-
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser.isPresent()) {
             throw new IllegalArgumentException("L'adresse e-mail est déjà utilisée.");
         }
-
             if(user.getPassword() != null && !user.getPassword().isEmpty()) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
             } else{
-                throw new IllegalArgumentException("Mot de Passe ne peut pas être null ou  vide");
+                throw new IllegalArgumentException("Mot de Passe ne peut pas être null ou vide");
             }
             User userSaved = userRepository.save(user);
             emailService.sendWelcomeEmail(user.getEmail());
-
         return userSaved;
     }
-
 
     public void deleteUser(String id) {
         userRepository.deleteById(id);
     }
 
-
     public void resetPassword(String email) {
-
-
         Optional<User> user = userRepository.findByEmail(email);
         if(user.isPresent()) {
             User userSaved = user.get();
@@ -90,7 +79,6 @@ public class UserService {
         }
     }
 
-
     public Optional<User> updateUser(String id, User user) {
         Optional<User> existingUser = userRepository.findById(id);
         if (existingUser.isPresent()) {
@@ -107,6 +95,4 @@ public class UserService {
             return Optional.empty();
         }
     }
-
-
-  }
+}

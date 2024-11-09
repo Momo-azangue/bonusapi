@@ -1,6 +1,5 @@
 package com.systemedebons.bonification.Security;
 
-
 import com.systemedebons.bonification.Security.Jwt.AuthEntryPointJwt;
 import com.systemedebons.bonification.Security.Jwt.AuthTokenFilter;
 import com.systemedebons.bonification.Security.Service.UserDetailsServiceImpl;
@@ -36,14 +35,12 @@ public class WebSecurityConfig {
     UserDetailsServiceImpl userDetailsService;
 
    @Autowired
-   private AuthEntryPointJwt unauthorizedHandler;
+   private AuthEntryPointJwt   unauthorizedHandler;
 
    @Bean
    public AuthTokenFilter authenticationJwtTokenFilter() {
        return new AuthTokenFilter();
    }
-
-
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -63,26 +60,20 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors(Customizer.withDefaults())
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/**","/swagger-ui/**","/api/test/**").permitAll()
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
             )
             .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
-
-
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -95,6 +86,4 @@ public class WebSecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
 }
-

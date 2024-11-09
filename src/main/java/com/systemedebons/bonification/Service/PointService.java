@@ -11,7 +11,6 @@ import java.util.Optional;
 @Service
 public class PointService {
 
-
     @Autowired
     private PointRepository pointRepository;
 
@@ -21,7 +20,6 @@ public class PointService {
 
     public Optional<Point> getPointById(String id) {
         return pointRepository.findById(id);
-
     }
 
     public List<Point> getPointsByUserId(String UserId) {

@@ -58,8 +58,6 @@ public class RefreshTokenService {
         });
     }
 
-
-
     public void updateRefreshToken(String userId, String newToken) {
         RefreshToken refreshToken = refreshTokenRepository.findByUserId(userId)
                 .orElseThrow(() -> new TokenRefreshException("User ID " + userId, "User not found"));
@@ -67,9 +65,6 @@ public class RefreshTokenService {
         refreshToken.setExpiryDate(new Date(System.currentTimeMillis() + jwtRefreshExpirationMs).toInstant());
         refreshTokenRepository.save(refreshToken);
     }
-
-
-
 
     public Optional<RefreshToken> findByToken(String token) {
         return refreshTokenRepository.findByToken(token);

@@ -17,7 +17,6 @@ public class EmailService {
         message.setSubject(subject);
         message.setText(body);
         emailSender.send(message);
-
     }
 
     public void sendWelcomeEmail(String to) {

@@ -10,6 +10,4 @@ public class Role {
     private String id;
 
     private ERole name;
-
-
 }

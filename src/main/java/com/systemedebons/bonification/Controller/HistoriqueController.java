@@ -51,10 +51,6 @@ public class HistoriqueController {
         return historiqueService.saveHistorique(historique);
     }
 
-
-
-
-
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteHistorique(@PathVariable String id) {

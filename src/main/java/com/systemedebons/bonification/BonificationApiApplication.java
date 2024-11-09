@@ -15,7 +15,4 @@ public class BonificationApiApplication {
         SpringApplication.run(BonificationApiApplication.class, args);
     }
 
-
-
-
 }

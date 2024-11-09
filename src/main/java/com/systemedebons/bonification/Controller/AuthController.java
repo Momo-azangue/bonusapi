@@ -230,9 +230,4 @@ public class AuthController {
         refreshTokenService.deleteByToken(requestToken);
         return ResponseEntity.ok(new MessageResponse("Log out successful!"));
     }
-
-
-
-
-
 }

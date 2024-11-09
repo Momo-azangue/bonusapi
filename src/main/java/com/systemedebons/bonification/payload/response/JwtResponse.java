@@ -1,7 +1,5 @@
 package com.systemedebons.bonification.payload.response;
 
-
-
 import lombok.Data;
 
 import java.util.List;
