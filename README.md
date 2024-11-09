@@ -1,11 +1,12 @@
-## PRÉSENTATION DES TÂCHES À RÉALISER 
+# PRÉSENTATION DES TÂCHES À RÉALISER 
 
+## OBJECTIF
 La tâche importante que nous devrons réaliser est l'indépendance au niveau de la bse de données, entre notre API 
 et une autre API qui souhaiterait l'utiliser. Cela passera par : 
 - Redéfinir les entités
 - Ajuster le fonctionnement des transactions
 
-# Définition de l'entité Client
+###  Définition de l'entité Client
 Dans la version modifiée de l'API, les utilisateurs seront désormais appelés **Client**, et le termer **User** lui, 
 sera conservé pour les API. Donc, l'authentification ne sera pas réaliser par les utilisateurs proprement parlé, mais
 plutôt par les API qui utiliseront notre système. Seul ceux-ci seront considérés comme des utilisateur de notre système.
@@ -17,7 +18,7 @@ une Client dans notre base de données aura la forme suivante :
 L'entité Client sera crée sur le même format que les autres entités et son interface Repository elle aussi sera créée
 toujours en calquant les autre modèles.
 
-# Redéfinition de l'entité User 
+### Redéfinition de l'entité User 
 Dans la première version de notre API, l'entité User était censée représenter un utilisateur quelconque qui 
 s'authentifierait directement avec notre système. Avec la nouvelle révision, cette entité contiendra maintenant les 
 champs : 
@@ -28,12 +29,12 @@ champs :
 - **roles :** autorisations 
 - **resetToken :** token permettant de s'authentifier si jamais l'authentification ne marchais pas
 
-# Redéfinition de l'entité Point, Historique, Transaction et Reward
+### Redéfinition de l'entité Point, Historique, Transaction et Reward
 Le seul changement à effectuer sur toutes ces entités est le passage de User à Client. En effet, ces entités ont été 
 créées avec l'optique d'être utilisées par les utilisateurs finaux, mais la redéfinition dans notre contexte, nous pousse
 à passer des User aux Client. 
 
-# Redéfinition de l'entité Rule 
+### Redéfinition de l'entité Rule 
 Les règles était d'abord faite pour être appliquées de manière égale à chaque utilisateur. Sauf que maintenant, les règles
 seront définis par les API et les règles définies par une API ne s'applique qu'à celle-ci.
 
@@ -41,25 +42,25 @@ Après l'ajout et la modifications des entités, la prochaine étape c'est la mo
 du service. En effet, les méthodes du services ont été conçus pour être utilisée directement par un utilisateur, sauf que
 cette fois ci, les méthodes seront appelées par des API qui nous passeront ces utilisateurs en paramètre. 
 
-# Redéfinition du UserService et UserController
+### Redéfinition du UserService et UserController
 Ici il faut retirer toutes les occurences au champs qui auront été retirés plus haut 
 
-# Redéfinition de HistoriqueService et HistoriqueController
+### Redéfinition de HistoriqueService et HistoriqueController
 - Ajouter une méthode pour récupérer toutes les entités Historique 
 - Ajouter une méthode pour qu'une API puisse récupérer toutes les entités Historique concernant ses utilisateurs 
 - Ajouter une méthode pour qu'une API puisse récupérer tous les historiques pour un Client qui lui appartient
 - Dans le controller il n'y a pas très souvent de méthodes implémentés. Nous allons utiliser cette convention ici. 
     Il faut déplacer toutes les méthodes du controller vers le service en créant les méthodes adaptées. 
 
-# Redéfinition de PointService 
+### Redéfinition de PointService 
 - Ajouter la méthode pour récupérer les points en fonction du Client et s'assurer que la personne qui retire est l'API
 - Ajouter la méthode pour récupérer les points de tous les clients d'une API spécifique
 
-# Redéfinition RewardService et RewardController
+### Redéfinition RewardService et RewardController
 - Transférer les méthodes écrites dans le controller vers le service 
 - Ignorer les annotations 
 
-# Redéfinition RuleService et RuleController 
+### Redéfinition RuleService et RuleController 
 - Ajouter une méthode qui permet de récupérer l'ensemble des règles éditées par une API 
 
 
