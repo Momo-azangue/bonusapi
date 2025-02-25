@@ -84,4 +84,4 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 ---
 
-Pour toute question ou support, veuillez contacter [support@votreentreprise.com](mailto:support@votreentreprise.com).
+Pour toute question ou support, veuillez contacter [contact support](watchowilly@gmail.com).
