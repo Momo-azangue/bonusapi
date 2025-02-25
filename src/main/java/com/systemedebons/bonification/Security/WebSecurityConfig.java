@@ -88,7 +88,7 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://app-bonus.vercel.app", "http://localhost:5173")); // Changez cette URL selon votre frontend
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://app-bonus.vercel.app", "http://localhost:5173", "https://bonus-front-epwttryip-willywatchos-projects.vercel.app")); // Changez cette URL selon votre frontend
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
